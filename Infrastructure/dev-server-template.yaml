@@ -346,12 +346,13 @@ Resources:
       ActionsEnabled: True
       AlarmActions:
         - !Sub "arn:aws:automate:${AWS::Region}:ec2:stop"
-      AlarmDescription: !Sub "Stops ${DevelopmentInstance} after 1 hour of inactivity."
+      AlarmDescription: !Sub "Stops ${DevelopmentInstance} after 10 minutes of inactivity."
       ComparisonOperator: LessThanOrEqualToThreshold
       Dimensions:
         - Name: InstanceId
           Value: !Ref DevelopmentInstance
-      EvaluationPeriods: 1
+      DatapointsToAlarm: 9
+      EvaluationPeriods: 10
       MetricName: CPUUtilization
       Namespace: AWS/EC2
       Period: 3600
@@ -397,21 +398,15 @@ Resources:
       Roles:
         - !Ref InstanceRole
 Outputs:
-  TemplateID:
-    Description: 'cloudonaut.io template id.'
-    Value: 'vpc/vpc-2azs'
-  TemplateVersion:
-    Description: 'cloudonaut.io template version.'
-    Value: '13.0.0'
   StackName:
     Description: 'Stack name.'
     Value: !Sub '${AWS::StackName}'
-  AZs: # Better name would be NumberOfAZs, but we keep the name for backward compatibility
+  NumberOfAZs:
     Description: 'Number of AZs'
     Value: 2
     Export:
       Name: !Sub '${AWS::StackName}-AZs'
-  AZList:  # Better name would be AZs, but the name was already used
+  AZs: 
     Description: 'List of AZs'
     Value: !Join [',', [!Select [0, !GetAZs ''], !Select [1, !GetAZs '']]]
     Export:

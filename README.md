@@ -13,7 +13,7 @@ This repo contains a [Cloudformation template](./dev-server-template.yaml) to de
 
 ## What's in the box?
 
-This will deploy a Amazon Linux EC2 instance, a VPC with subnets, and an Instance Profile granting admin access, and a cloudwatch alarm to turn off the instance after 3 hours of inactivity.
+This will deploy a Amazon Linux EC2 instance, a VPC with subnets, and an Instance Profile granting admin access, and a cloudwatch alarm to turn off the instance after 10 minutes of inactivity.
 
 ## What do I do with it?
 
